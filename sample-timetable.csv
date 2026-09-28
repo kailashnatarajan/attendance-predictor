@@ -1,0 +1,251 @@
+section,day,period,subject
+Section A,Mon,1,Chemistry
+Section A,Mon,2,Electronics
+Section A,Mon,3,Maths
+Section A,Mon,4,Programming
+Section A,Mon,5,Physics Lab
+Section A,Tue,1,English
+Section A,Tue,2,Programming Lab
+Section A,Tue,3,Chemistry
+Section A,Tue,4,Electronics
+Section A,Tue,5,Maths
+Section A,Wed,1,Physics Lab
+Section A,Wed,2,Physics
+Section A,Wed,3,English
+Section A,Wed,4,Programming Lab
+Section A,Wed,5,Chemistry
+Section A,Thu,1,Maths
+Section A,Thu,2,Programming
+Section A,Thu,3,Physics Lab
+Section A,Thu,4,Physics
+Section A,Thu,5,English
+Section A,Fri,1,Chemistry
+Section A,Fri,2,Electronics
+Section A,Fri,3,Maths
+Section A,Fri,4,Programming
+Section A,Fri,5,Physics Lab
+Section B,Mon,1,Electronics
+Section B,Mon,2,Maths
+Section B,Mon,3,Programming
+Section B,Mon,4,Physics Lab
+Section B,Mon,5,Physics
+Section B,Tue,1,Programming Lab
+Section B,Tue,2,Chemistry
+Section B,Tue,3,Electronics
+Section B,Tue,4,Maths
+Section B,Tue,5,Programming
+Section B,Wed,1,Physics
+Section B,Wed,2,English
+Section B,Wed,3,Programming Lab
+Section B,Wed,4,Chemistry
+Section B,Wed,5,Electronics
+Section B,Thu,1,Programming
+Section B,Thu,2,Physics Lab
+Section B,Thu,3,Physics
+Section B,Thu,4,English
+Section B,Thu,5,Programming Lab
+Section B,Fri,1,Electronics
+Section B,Fri,2,Maths
+Section B,Fri,3,Programming
+Section B,Fri,4,Physics Lab
+Section B,Fri,5,Physics
+Section C,Mon,1,Maths
+Section C,Mon,2,Programming
+Section C,Mon,3,Physics Lab
+Section C,Mon,4,Physics
+Section C,Mon,5,English
+Section C,Tue,1,Chemistry
+Section C,Tue,2,Electronics
+Section C,Tue,3,Maths
+Section C,Tue,4,Programming
+Section C,Tue,5,Physics Lab
+Section C,Wed,1,English
+Section C,Wed,2,Programming Lab
+Section C,Wed,3,Chemistry
+Section C,Wed,4,Electronics
+Section C,Wed,5,Maths
+Section C,Thu,1,Physics Lab
+Section C,Thu,2,Physics
+Section C,Thu,3,English
+Section C,Thu,4,Programming Lab
+Section C,Thu,5,Chemistry
+Section C,Fri,1,Maths
+Section C,Fri,2,Programming
+Section C,Fri,3,Physics Lab
+Section C,Fri,4,Physics
+Section C,Fri,5,English
+Section D,Mon,1,Programming
+Section D,Mon,2,Physics Lab
+Section D,Mon,3,Physics
+Section D,Mon,4,English
+Section D,Mon,5,Programming Lab
+Section D,Tue,1,Electronics
+Section D,Tue,2,Maths
+Section D,Tue,3,Programming
+Section D,Tue,4,Physics Lab
+Section D,Tue,5,Physics
+Section D,Wed,1,Programming Lab
+Section D,Wed,2,Chemistry
+Section D,Wed,3,Electronics
+Section D,Wed,4,Maths
+Section D,Wed,5,Programming
+Section D,Thu,1,Physics
+Section D,Thu,2,English
+Section D,Thu,3,Programming Lab
+Section D,Thu,4,Chemistry
+Section D,Thu,5,Electronics
+Section D,Fri,1,Programming
+Section D,Fri,2,Physics Lab
+Section D,Fri,3,Physics
+Section D,Fri,4,English
+Section D,Fri,5,Programming Lab
+Section E,Mon,1,Physics Lab
+Section E,Mon,2,Physics
+Section E,Mon,3,English
+Section E,Mon,4,Programming Lab
+Section E,Mon,5,Chemistry
+Section E,Tue,1,Maths
+Section E,Tue,2,Programming
+Section E,Tue,3,Physics Lab
+Section E,Tue,4,Physics
+Section E,Tue,5,English
+Section E,Wed,1,Chemistry
+Section E,Wed,2,Electronics
+Section E,Wed,3,Maths
+Section E,Wed,4,Programming
+Section E,Wed,5,Physics Lab
+Section E,Thu,1,English
+Section E,Thu,2,Programming Lab
+Section E,Thu,3,Chemistry
+Section E,Thu,4,Electronics
+Section E,Thu,5,Maths
+Section E,Fri,1,Physics Lab
+Section E,Fri,2,Physics
+Section E,Fri,3,English
+Section E,Fri,4,Programming Lab
+Section E,Fri,5,Chemistry
+Section F,Mon,1,Physics
+Section F,Mon,2,English
+Section F,Mon,3,Programming Lab
+Section F,Mon,4,Chemistry
+Section F,Mon,5,Electronics
+Section F,Tue,1,Programming
+Section F,Tue,2,Physics Lab
+Section F,Tue,3,Physics
+Section F,Tue,4,English
+Section F,Tue,5,Programming Lab
+Section F,Wed,1,Electronics
+Section F,Wed,2,Maths
+Section F,Wed,3,Programming
+Section F,Wed,4,Physics Lab
+Section F,Wed,5,Physics
+Section F,Thu,1,Programming Lab
+Section F,Thu,2,Chemistry
+Section F,Thu,3,Electronics
+Section F,Thu,4,Maths
+Section F,Thu,5,Programming
+Section F,Fri,1,Physics
+Section F,Fri,2,English
+Section F,Fri,3,Programming Lab
+Section F,Fri,4,Chemistry
+Section F,Fri,5,Electronics
+Section G,Mon,1,English
+Section G,Mon,2,Programming Lab
+Section G,Mon,3,Chemistry
+Section G,Mon,4,Electronics
+Section G,Mon,5,Maths
+Section G,Tue,1,Physics Lab
+Section G,Tue,2,Physics
+Section G,Tue,3,English
+Section G,Tue,4,Programming Lab
+Section G,Tue,5,Chemistry
+Section G,Wed,1,Maths
+Section G,Wed,2,Programming
+Section G,Wed,3,Physics Lab
+Section G,Wed,4,Physics
+Section G,Wed,5,English
+Section G,Thu,1,Chemistry
+Section G,Thu,2,Electronics
+Section G,Thu,3,Maths
+Section G,Thu,4,Programming
+Section G,Thu,5,Physics Lab
+Section G,Fri,1,English
+Section G,Fri,2,Programming Lab
+Section G,Fri,3,Chemistry
+Section G,Fri,4,Electronics
+Section G,Fri,5,Maths
+Section H,Mon,1,Programming Lab
+Section H,Mon,2,Chemistry
+Section H,Mon,3,Electronics
+Section H,Mon,4,Maths
+Section H,Mon,5,Programming
+Section H,Tue,1,Physics
+Section H,Tue,2,English
+Section H,Tue,3,Programming Lab
+Section H,Tue,4,Chemistry
+Section H,Tue,5,Electronics
+Section H,Wed,1,Programming
+Section H,Wed,2,Physics Lab
+Section H,Wed,3,Physics
+Section H,Wed,4,English
+Section H,Wed,5,Programming Lab
+Section H,Thu,1,Electronics
+Section H,Thu,2,Maths
+Section H,Thu,3,Programming
+Section H,Thu,4,Physics Lab
+Section H,Thu,5,Physics
+Section H,Fri,1,Programming Lab
+Section H,Fri,2,Chemistry
+Section H,Fri,3,Electronics
+Section H,Fri,4,Maths
+Section H,Fri,5,Programming
+Section I,Mon,1,Chemistry
+Section I,Mon,2,Electronics
+Section I,Mon,3,Maths
+Section I,Mon,4,Programming
+Section I,Mon,5,Physics Lab
+Section I,Tue,1,English
+Section I,Tue,2,Programming Lab
+Section I,Tue,3,Chemistry
+Section I,Tue,4,Electronics
+Section I,Tue,5,Maths
+Section I,Wed,1,Physics Lab
+Section I,Wed,2,Physics
+Section I,Wed,3,English
+Section I,Wed,4,Programming Lab
+Section I,Wed,5,Chemistry
+Section I,Thu,1,Maths
+Section I,Thu,2,Programming
+Section I,Thu,3,Physics Lab
+Section I,Thu,4,Physics
+Section I,Thu,5,English
+Section I,Fri,1,Chemistry
+Section I,Fri,2,Electronics
+Section I,Fri,3,Maths
+Section I,Fri,4,Programming
+Section I,Fri,5,Physics Lab
+Section J,Mon,1,Electronics
+Section J,Mon,2,Maths
+Section J,Mon,3,Programming
+Section J,Mon,4,Physics Lab
+Section J,Mon,5,Physics
+Section J,Tue,1,Programming Lab
+Section J,Tue,2,Chemistry
+Section J,Tue,3,Electronics
+Section J,Tue,4,Maths
+Section J,Tue,5,Programming
+Section J,Wed,1,Physics
+Section J,Wed,2,English
+Section J,Wed,3,Programming Lab
+Section J,Wed,4,Chemistry
+Section J,Wed,5,Electronics
+Section J,Thu,1,Programming
+Section J,Thu,2,Physics Lab
+Section J,Thu,3,Physics
+Section J,Thu,4,English
+Section J,Thu,5,Programming Lab
+Section J,Fri,1,Electronics
+Section J,Fri,2,Maths
+Section J,Fri,3,Programming
+Section J,Fri,4,Physics Lab
+Section J,Fri,5,Physics

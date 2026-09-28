@@ -1,0 +1,377 @@
+{
+  "sections": {
+    "Section A": {
+      "Mon": [
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab"
+      ],
+      "Tue": [
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths"
+      ],
+      "Wed": [
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry"
+      ],
+      "Thu": [
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English"
+      ],
+      "Fri": [
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab"
+      ]
+    },
+    "Section B": {
+      "Mon": [
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics"
+      ],
+      "Tue": [
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming"
+      ],
+      "Wed": [
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics"
+      ],
+      "Thu": [
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab"
+      ],
+      "Fri": [
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics"
+      ]
+    },
+    "Section C": {
+      "Mon": [
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English"
+      ],
+      "Tue": [
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab"
+      ],
+      "Wed": [
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths"
+      ],
+      "Thu": [
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry"
+      ],
+      "Fri": [
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English"
+      ]
+    },
+    "Section D": {
+      "Mon": [
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab"
+      ],
+      "Tue": [
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics"
+      ],
+      "Wed": [
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming"
+      ],
+      "Thu": [
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics"
+      ],
+      "Fri": [
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab"
+      ]
+    },
+    "Section E": {
+      "Mon": [
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry"
+      ],
+      "Tue": [
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English"
+      ],
+      "Wed": [
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab"
+      ],
+      "Thu": [
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths"
+      ],
+      "Fri": [
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry"
+      ]
+    },
+    "Section F": {
+      "Mon": [
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics"
+      ],
+      "Tue": [
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab"
+      ],
+      "Wed": [
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics"
+      ],
+      "Thu": [
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming"
+      ],
+      "Fri": [
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics"
+      ]
+    },
+    "Section G": {
+      "Mon": [
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths"
+      ],
+      "Tue": [
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry"
+      ],
+      "Wed": [
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English"
+      ],
+      "Thu": [
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab"
+      ],
+      "Fri": [
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths"
+      ]
+    },
+    "Section H": {
+      "Mon": [
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming"
+      ],
+      "Tue": [
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics"
+      ],
+      "Wed": [
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab"
+      ],
+      "Thu": [
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics"
+      ],
+      "Fri": [
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming"
+      ]
+    },
+    "Section I": {
+      "Mon": [
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab"
+      ],
+      "Tue": [
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths"
+      ],
+      "Wed": [
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry"
+      ],
+      "Thu": [
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English"
+      ],
+      "Fri": [
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab"
+      ]
+    },
+    "Section J": {
+      "Mon": [
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics"
+      ],
+      "Tue": [
+        "Programming Lab",
+        "Chemistry",
+        "Electronics",
+        "Maths",
+        "Programming"
+      ],
+      "Wed": [
+        "Physics",
+        "English",
+        "Programming Lab",
+        "Chemistry",
+        "Electronics"
+      ],
+      "Thu": [
+        "Programming",
+        "Physics Lab",
+        "Physics",
+        "English",
+        "Programming Lab"
+      ],
+      "Fri": [
+        "Electronics",
+        "Maths",
+        "Programming",
+        "Physics Lab",
+        "Physics"
+      ]
+    }
+  },
+  "holidays": [
+    "2026-10-02"
+  ]
+}

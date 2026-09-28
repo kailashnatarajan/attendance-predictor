@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Attendance Predictor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dirt:#593d29; --dirt2:#4a3221; --grass:#5d9b3a; --grass-d:#3f6b26;
+  --panel:#c6c6c6; --hi:#ffffff; --lo:#555555; --ink:#1e1e1e; --slot:#8b8b8b;
+  --xp:#7fe01f; --gold:#f5c400; --red:#c0392b; --redd:#7a1f16; --blue:#3b6ea5;
+  --px:"Press Start 2P", "Courier New", monospace;
+  --body:"VT323", "Courier New", monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit}
+body{
+  margin:0; color:var(--ink); font-family:var(--body); font-size:22px; line-height:1.25;
+  background-color:var(--dirt);
+  background-image:
+    conic-gradient(var(--dirt2) 25%, transparent 0 50%, var(--dirt2) 0 75%, transparent 0);
+  background-size:48px 48px;
+}
+h1,h2,h3{font-family:var(--px); font-weight:400; margin:0}
+.top{
+  background:var(--grass); border-bottom:8px solid var(--grass-d);
+  box-shadow:0 8px 0 #2b4a19, inset 0 -6px 0 rgba(0,0,0,.12);
+  padding:22px 16px 18px; text-align:center;
+}
+.top h1{font-size:clamp(16px,4.2vw,30px); color:#fff; text-shadow:3px 3px 0 #1e3a10; line-height:1.4}
+.top p{margin:10px 0 0; color:#eaffd6; font-size:24px; text-shadow:2px 2px 0 #1e3a10}
+main{max-width:980px; margin:28px auto 60px; padding:0 14px; display:grid; gap:22px}
+.panel{
+  background:var(--panel); padding:18px;
+  border:4px solid #000;
+  box-shadow: inset 4px 4px 0 var(--hi), inset -4px -4px 0 var(--lo), 6px 6px 0 rgba(0,0,0,.45);
+}
+.panel > h2{font-size:14px; margin-bottom:14px; line-height:1.5}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+label{display:block; font-size:22px; margin-bottom:4px}
+select,input[type=date],input[type=number],textarea{
+  width:100%; font-family:var(--body); font-size:24px; color:#fff; background:#3a3a3a;
+  border:3px solid #000; padding:6px 10px;
+  box-shadow: inset 3px 3px 0 #1c1c1c, inset -3px -3px 0 #6a6a6a;
+  border-radius:0;
+}
+select option{background:#3a3a3a}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,summary:focus-visible,.file:focus-within{
+  outline:4px solid var(--gold); outline-offset:2px;
+}
+.fixed{background:#3a3a3a; color:#fff; border:3px solid #000; padding:6px 10px; font-size:24px;
+  box-shadow: inset 3px 3px 0 #1c1c1c, inset -3px -3px 0 #6a6a6a;}
+.check{display:flex; gap:10px; align-items:center; margin-top:12px; font-size:22px; cursor:pointer}
+.check input{width:22px; height:22px; accent-color:#3f6b26}
+
+.btn{
+  font-family:var(--px); font-size:13px; color:#fff; cursor:pointer; padding:14px 18px;
+  background:#7d7d7d; border:4px solid #000; border-radius:0; text-shadow:2px 2px 0 #333;
+  box-shadow: inset 4px 4px 0 #b4b4b4, inset -4px -4px 0 #4e4e4e;
+}
+.btn:hover{background:#8d8d8d}
+.btn:active{box-shadow: inset 4px 4px 0 #4e4e4e, inset -4px -4px 0 #b4b4b4}
+.btn.go{background:#4f8f2c; box-shadow: inset 4px 4px 0 #86c85a, inset -4px -4px 0 #2d5a17; width:100%; font-size:15px; padding:18px}
+.btn.go:hover{background:#5ba334}
+.file{display:inline-block}
+.file input{position:absolute; opacity:0; width:1px; height:1px}
+
+.subjects{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:12px}
+.slot{background:#a8a8a8; border:3px solid #000; padding:10px;
+  box-shadow: inset 3px 3px 0 #dcdcdc, inset -3px -3px 0 #6b6b6b}
+.slot .n{font-size:24px; margin-bottom:4px}
+.slot .n small{color:#444; font-size:19px}
+.slot .pct{display:flex; align-items:center; gap:8px}
+.slot .pct input{width:100px}
+.muted{color:#3d3d3d}
+details summary{cursor:pointer; font-family:var(--px); font-size:12px; line-height:1.6}
+details textarea{height:70px; resize:vertical}
+.note{font-size:20px; color:#3d3d3d; margin:8px 0 0}
+.status{font-size:20px; margin-top:8px}
+
+/* results */
+.tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-bottom:16px}
+.tile{background:#3a3a3a; color:#fff; border:3px solid #000; padding:12px;
+  box-shadow: inset 3px 3px 0 #1c1c1c, inset -3px -3px 0 #6a6a6a}
+.tile b{display:block; font-family:var(--px); font-weight:400; font-size:24px; color:var(--xp); margin-bottom:6px}
+.tile span{font-size:21px}
+.alert{
+  background:var(--red); color:#fff; border:4px solid #000; padding:16px; margin-bottom:16px;
+  box-shadow: inset 4px 4px 0 #e5695a, inset -4px -4px 0 var(--redd), 0 0 0 4px #ffdb4d;
+  animation:flash 1s steps(2,jump-none) infinite;
+}
+.alert h3{font-size:clamp(13px,3.2vw,20px); line-height:1.5; margin-bottom:8px; text-shadow:2px 2px 0 var(--redd)}
+.alert p{margin:0; font-size:23px}
+@keyframes flash{50%{box-shadow: inset 4px 4px 0 #e5695a, inset -4px -4px 0 var(--redd), 0 0 0 4px #000}}
+@media (prefers-reduced-motion:reduce){.alert{animation:none}}
+.cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:14px}
+.card{background:#a8a8a8; border:4px solid #000; padding:12px;
+  box-shadow: inset 3px 3px 0 #dcdcdc, inset -3px -3px 0 #6b6b6b}
+.card.bad{background:#d99a93}
+.card.warn{background:#e2cf8a}
+.card h3{font-size:12px; line-height:1.5; margin-bottom:8px}
+.chip{display:inline-block; font-family:var(--px); font-size:10px; padding:5px 7px; border:3px solid #000; color:#fff; margin-bottom:8px}
+.chip.safe{background:#3f7d20} .chip.ok{background:var(--blue)} .chip.danger{background:#b5651d} .chip.dead{background:var(--red)}
+.xp{position:relative; height:20px; background:#1c1c1c; border:3px solid #000; margin:6px 0 20px}
+.xp i{position:absolute; left:0; top:0; bottom:0; background:var(--xp); box-shadow:inset 0 4px 0 rgba(255,255,255,.35)}
+.xp u{position:absolute; top:-6px; bottom:-6px; width:3px; background:#fff; text-decoration:none}
+.xp u span{position:absolute; top:100%; left:50%; transform:translateX(-50%); font-size:17px; color:#111; margin-top:2px}
+.rows{display:grid; gap:2px; font-size:21px}
+.rows div{display:flex; justify-content:space-between; gap:10px; border-bottom:2px dashed rgba(0,0,0,.25); padding:2px 0}
+.rows b{font-weight:400; text-align:right}
+.rows .h{font-family:var(--px); font-size:10px; margin-top:8px; border:0; color:#222}
+.good{color:#1c5c0a} .badt{color:#8a1408}
+.empty{font-size:24px}
+
+/* phase 2 */
+.hint{font-size:21px; color:#3d3d3d; margin:0 0 12px}
+.hearts{display:flex; flex-wrap:wrap; gap:4px; margin:6px 0 10px}
+.health{display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:center; margin-bottom:16px}
+@media (max-width:640px){.health{grid-template-columns:1fr}}
+.big{font-family:var(--px); font-size:clamp(20px,5vw,30px); color:#1e1e1e}
+.chartbox{background:#2a2a2a; border:4px solid #000; padding:8px; margin-bottom:16px;
+  box-shadow: inset 3px 3px 0 #111, inset -3px -3px 0 #555}
+.chartbox h3{font-size:11px; color:#fff; margin:4px 4px 8px; line-height:1.6}
+.chartbox svg{display:block; width:100%; height:auto}
+.legend{display:flex; flex-wrap:wrap; gap:6px 16px; color:#ddd; font-size:20px; margin:6px 4px 2px}
+.legend i{display:inline-block; width:14px; height:14px; margin-right:6px; vertical-align:-1px; border:2px solid #000}
+.oform{display:grid; grid-template-columns:1.3fr 1fr 1fr auto; gap:10px; align-items:end}
+@media (max-width:720px){.oform{grid-template-columns:1fr 1fr}.oform .btn{grid-column:1/-1}}
+.leaves{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0}
+.lv{background:#3a3a3a; color:#fff; border:3px solid #000; padding:4px 6px 4px 10px; font-size:20px; display:flex; gap:8px; align-items:center;
+  box-shadow: inset 3px 3px 0 #1c1c1c, inset -3px -3px 0 #6a6a6a}
+.lv button{font-family:var(--px); font-size:10px; background:var(--red); color:#fff; border:3px solid #000; cursor:pointer; padding:4px 6px}
+.tblwrap{overflow-x:auto}
+table{border-collapse:collapse; width:100%; font-size:21px}
+th{font-family:var(--px); font-weight:400; font-size:10px; text-align:left; padding:8px 6px; background:#3a3a3a; color:#fff}
+td{padding:6px; border-bottom:2px dashed rgba(0,0,0,.25)}
+.chip.sm{margin:0}
+/* chat */
+#fab{position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom,0px)); z-index:50; font-size:12px; padding:14px 14px}
+#chat{position:fixed; right:12px; bottom:calc(78px + env(safe-area-inset-bottom,0px)); z-index:50; width:min(370px, calc(100vw - 24px));
+  height:min(72vh, 500px); display:flex; flex-direction:column; background:var(--panel); border:4px solid #000;
+  box-shadow: inset 4px 4px 0 var(--hi), inset -4px -4px 0 var(--lo), 6px 6px 0 rgba(0,0,0,.5)}
+#chat[hidden]{display:none}
+.chead{background:var(--grass); border-bottom:4px solid #000; padding:10px 12px; font-family:var(--px); font-size:11px; color:#fff; text-shadow:2px 2px 0 #1e3a10; display:flex; justify-content:space-between; align-items:center; gap:8px; line-height:1.5}
+.chead button{font-family:var(--px); font-size:10px; background:#7d7d7d; color:#fff; border:3px solid #000; cursor:pointer; padding:5px 7px}
+#msgs{flex:1; overflow-y:auto; padding:10px; display:flex; flex-direction:column; gap:8px}
+.b{max-width:88%; padding:8px 10px; border:3px solid #000; font-size:22px; white-space:pre-wrap; overflow-wrap:anywhere}
+.b.bot{align-self:flex-start; background:#e8e8e8}
+.b.user{align-self:flex-end; background:#4f8f2c; color:#fff}
+.sugs{display:flex; flex-wrap:wrap; gap:6px; padding:0 10px 8px}
+.sugs button{font-family:var(--body); font-size:19px; background:#a8a8a8; border:3px solid #000; cursor:pointer; padding:3px 8px; text-align:left}
+.cin{display:flex; gap:6px; padding:8px; border-top:4px solid #000}
+.cin input{flex:1; min-width:0; font-family:var(--body); font-size:22px; color:#fff; background:#3a3a3a; border:3px solid #000; padding:5px 8px; border-radius:0}
+.cin .btn{padding:8px 10px; font-size:11px}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>ATTENDANCE PREDICTOR</h1>
+  <p>Mine your classes wisely. Stay out of the detention zone.</p>
+</header>
+
+<main>
+  <section class="panel" aria-labelledby="s1">
+    <h2 id="s1">1. Choose your world</h2>
+    <div class="grid2">
+      <div>
+        <label for="section">Class section</label>
+        <select id="section"></select>
+      </div>
+      <div>
+        <label>Today</label>
+        <div class="fixed" id="today"></div>
+      </div>
+      <div>
+        <label for="plan">Planning date (any day before the semester ends)</label>
+        <input type="date" id="plan">
+      </div>
+      <div>
+        <label>Semester</label>
+        <div class="fixed">29 Aug 2026 to 29 Nov 2026</div>
+      </div>
+    </div>
+    <label class="check"><input type="checkbox" id="inclToday" checked> Today's classes are still to come</label>
+
+    <details style="margin-top:16px">
+      <summary>Timetable data and holidays</summary>
+      <p class="note" id="dataStatus"></p>
+      <p style="margin:10px 0"><label class="btn file">Load timetable file
+        <input type="file" id="file" accept=".csv,.json,application/json,text/csv"></label></p>
+      <p class="note">CSV columns: section, day, subject (one row per class period). Or JSON: {"sections":{"A":{"Mon":["Maths","Physics"]}},"holidays":["2026-10-02"]}</p>
+      <label for="hol" style="margin-top:10px">Holidays (YYYY-MM-DD, separated by commas)</label>
+      <textarea id="hol">2026-10-02</textarea>
+    </details>
+  </section>
+
+  <section class="panel" aria-labelledby="s2">
+    <h2 id="s2">2. Your attendance so far</h2>
+    <div class="subjects" id="subjects"></div>
+    <p class="note">Enter the percentage shown on your college portal for each subject.</p>
+  </section>
+
+  <button class="btn go" id="calc">CALCULATE MY ATTENDANCE</button>
+
+  <div id="results" hidden>
+    <section class="panel" aria-live="polite" style="margin-bottom:22px">
+      <h2>3. Your plan</h2>
+      <div id="out"></div>
+    </section>
+
+    <section class="panel" style="margin-bottom:22px">
+      <h2>4. Attendance health</h2>
+      <div id="charts"></div>
+    </section>
+
+    <section class="panel">
+      <h2>5. OD and leave simulator</h2>
+      <p class="hint">Add days off and watch your final percentage change. On-duty counts as present, medical leave is removed from the total, and absent counts as missed.</p>
+      <div class="oform">
+        <div><label for="ltype">Type</label>
+          <select id="ltype"><option value="od">On-duty (OD)</option><option value="medical">Medical leave</option><option value="absent">Absent</option></select></div>
+        <div><label for="lfrom">From</label><input type="date" id="lfrom"></div>
+        <div><label for="lto">To</label><input type="date" id="lto"></div>
+        <button class="btn" id="ladd" type="button">ADD DAYS</button>
+      </div>
+      <div class="leaves" id="leaves"></div>
+      <div style="max-width:420px"><label for="rest">All my other remaining classes</label>
+        <select id="rest"><option value="yes">I will attend them</option><option value="no">I will miss them</option></select></div>
+      <div class="tblwrap" style="margin-top:14px" id="simOut"></div>
+    </section>
+  </div>
+</main>
+
+
+<button class="btn go" id="fab" type="button" aria-expanded="false" aria-controls="chat" style="width:auto">ASK ADVISOR</button>
+<div id="chat" hidden role="dialog" aria-label="Attendance Advisor">
+  <div class="chead"><span>ATTENDANCE ADVISOR</span><button type="button" id="cclose" aria-label="Close chat">X</button></div>
+  <div id="msgs" aria-live="polite"></div>
+  <div class="sugs" id="sugs"></div>
+  <div class="cin"><input id="cin" type="text" placeholder="Ask about leaves, OD, 75%..." aria-label="Message"><button class="btn" id="csend" type="button">SEND</button></div>
+</div>
+
+<script>
+(function(){
+  var START = new Date(2026,7,29), END = new Date(2026,10,29);
+  var DAYS = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  var data = { sections:{}, holidays:[] };
+  var usingSample = true;
+
+  /* ---------- sample timetables (replace by loading the real dataset) ---------- */
+  (function makeSample(){
+    var pool = ["Maths","Physics","Chemistry","Programming","English","Electronics","Physics Lab","Programming Lab"];
+    for (var i=0;i<10;i++){
+      var name = "Section " + String.fromCharCode(65+i), tt = {};
+      for (var d=1; d<=5; d++){
+        var list = [];
+        for (var p=0;p<5;p++) list.push(pool[(i*3 + d*2 + p*3) % pool.length]);
+        tt[DAYS[d]] = list;
+      }
+      data.sections[name] = tt;
+    }
+  })();
+
+  /* ---------- helpers ---------- */
+  var $ = function(id){ return document.getElementById(id); };
+  function iso(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+  function nice(d){ return d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"}); }
+  function sod(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function addDays(d,n){ var x=new Date(d.getFullYear(), d.getMonth(), d.getDate()+n); return x; }
+  function holidaySet(){
+    var s = {};
+    $("hol").value.split(/[\s,;]+/).forEach(function(t){ if (/^\d{4}-\d{2}-\d{2}$/.test(t)) s[t]=1; });
+    return s;
+  }
+  // count classes per subject from a to b inclusive
+  function count(section, a, b){
+    var tt = data.sections[section] || {}, hol = holidaySet(), res = {};
+    for (var d=sod(a); d<=b; d=addDays(d,1)){
+      if (d<START || d>END || hol[iso(d)]) continue;
+      var list = tt[DAYS[d.getDay()]] || [];
+      list.forEach(function(s){ res[s] = (res[s]||0)+1; });
+    }
+    return res;
+  }
+  function subjectsOf(section){
+    var set = {}, tt = data.sections[section] || {};
+    Object.keys(tt).forEach(function(k){ tt[k].forEach(function(s){ set[s]=1; }); });
+    return Object.keys(set).sort();
+  }
+
+  /* ---------- setup ---------- */
+  var today = sod(new Date());
+  $("today").textContent = nice(today);
+  var planEl = $("plan");
+  planEl.min = iso(today < START ? START : today);
+  planEl.max = iso(addDays(END,-0));
+  var def = addDays(today, 14); if (def > END) def = END;
+  planEl.value = iso(def);
+
+  function fillSections(){
+    var sel = $("section"), keep = sel.value;
+    sel.innerHTML = "";
+    Object.keys(data.sections).forEach(function(k){
+      var o = document.createElement("option"); o.value = o.textContent = k; sel.appendChild(o);
+    });
+    if (keep && data.sections[keep]) sel.value = keep;
+    $("dataStatus").textContent = usingSample
+      ? "Using sample timetables. Load your real dataset file to replace them."
+      : "Loaded " + Object.keys(data.sections).length + " sections from your file.";
+  }
+  function fillSubjects(){
+    var box = $("subjects"); box.innerHTML = "";
+    var list = subjectsOf($("section").value);
+    if (!list.length){ box.innerHTML = '<p class="empty">No subjects found for this section.</p>'; return; }
+    list.forEach(function(s,i){
+      var w = document.createElement("div"); w.className = "slot";
+      w.innerHTML = '<div class="n"></div><div class="pct"><input type="number" min="0" max="100" step="0.01" value="80" inputmode="decimal" aria-label=""><span>%</span></div>';
+      w.querySelector(".n").textContent = s;
+      w.querySelector("input").setAttribute("aria-label", s + " attendance percentage");
+      w.querySelector("input").dataset.subject = s;
+      box.appendChild(w);
+    });
+  }
+
+  /* ---------- core maths ---------- */
+  // A = classes attended so far, T = total classes by the horizon, R = classes still to come
+  function need(A, T, R, t){
+    var x = Math.max(0, Math.ceil(t*T - A - 1e-9));
+    return { x:x, possible: x <= R, skip: R - x };
+  }
+  function line(label, val, cls){ return '<div><span>'+label+'</span><b class="'+(cls||"")+'">'+val+'</b></div>'; }
+  function targetLine(label, r, R){
+    if (R === 0) return line(label, "No classes left");
+    if (!r.possible) return line(label, "Not reachable", "badt");
+    if (r.x === 0) return line(label, "Already safe (can skip "+R+")", "good");
+    return line(label, "Attend "+r.x+" of "+R + " (skip "+r.skip+")");
+  }
+
+  /* ================= PHASE 1 + 2 CORE ================= */
+  var model = null, leaves = [];
+
+  function parseISO(s){ var p = String(s).split("-"); return new Date(+p[0], +p[1]-1, +p[2]); }
+  function dayCounts(tt, hol, d){
+    if (d < START || d > END || hol[iso(d)]) return null;
+    var list = tt[DAYS[d.getDay()]] || [], res = {}, any = false;
+    list.forEach(function(s){ res[s] = (res[s]||0)+1; any = true; });
+    return any ? res : null;
+  }
+
+  // Builds everything the dashboard shows from the current inputs.
+  function compute(){
+    var section = $("section").value, incl = $("inclToday").checked;
+    var winStart = incl ? today : addDays(today,1);
+    if (winStart < START) winStart = START;
+    var plan = planEl.value ? parseISO(planEl.value) : END;
+    if (plan > END) plan = END;
+    var tt = data.sections[section] || {}, hol = holidaySet();
+
+    var held = count(section, START, addDays(winStart,-1));
+    var futureDays = [];
+    for (var d = sod(winStart); d <= END; d = addDays(d,1)){
+      var c = dayCounts(tt, hol, d);
+      if (c) futureDays.push({ date:d, iso:iso(d), subs:c });
+    }
+    var left = {}, leftPlan = {};
+    futureDays.forEach(function(fd){
+      Object.keys(fd.subs).forEach(function(s){
+        left[s] = (left[s]||0) + fd.subs[s];
+        if (fd.date <= plan) leftPlan[s] = (leftPlan[s]||0) + fd.subs[s];
+      });
+    });
+
+    var inputs = {};
+    document.querySelectorAll("#subjects input").forEach(function(i){ inputs[i.dataset.subject] = parseFloat(i.value); });
+
+    var subs = subjectsOf(section).map(function(s){
+      var H = held[s]||0, R = left[s]||0, Rp = leftPlan[s]||0;
+      var p = inputs[s]; if (isNaN(p)) p = 0; p = Math.min(100, Math.max(0, p));
+      var A = H ? p/100*H : 0, cur = H ? p : 0, T = H+R, Tp = H+Rp;
+      var o = { name:s, H:H, R:R, Rp:Rp, A:A, cur:cur,
+        n75:need(A,T,R,.75), n90:need(A,T,R,.90), p75:need(A,Tp,Rp,.75), p90:need(A,Tp,Rp,.90),
+        best: T ? (A+R)/T*100 : cur };
+      if (R>0 && !o.n75.possible){ o.st="IRREVERSIBLE DETENTION"; o.cls="bad"; o.chip="dead"; o.key="irreversible"; }
+      else if (cur < 75){ o.st="DETENTION ZONE"; o.cls="warn"; o.chip="danger"; o.key="danger"; }
+      else if (cur < 90){ o.st="SAFE, BELOW 90%"; o.cls=""; o.chip="ok"; o.key="safe"; }
+      else { o.st="ELITE 90%+"; o.cls=""; o.chip="safe"; o.key="elite"; }
+      return o;
+    });
+    var sumH=0, sumA=0; subs.forEach(function(s){ sumH+=s.H; sumA+=s.A; });
+    return { section:section, incl:incl, winStart:winStart, plan:plan, subs:subs, futureDays:futureDays,
+      totLeft: subs.reduce(function(a,s){return a+s.R;},0), totPlan: subs.reduce(function(a,s){return a+s.Rp;},0),
+      overall: sumH ? sumA/sumH*100 : 0, sumH:sumH, sumA:sumA };
+  }
+  function ensureModel(){ model = compute(); return model; }
+
+  /* ---------- leave / OD projection ---------- */
+  function leaveMap(lv){
+    var map = {};
+    lv.forEach(function(l){
+      var a = parseISO(l.from), b = parseISO(l.to), n = 0;
+      for (var d=a; d<=b && n<250; d=addDays(d,1), n++) map[iso(d)] = l.type;
+    });
+    return map;
+  }
+  function project(m, lv, attendRest){
+    var map = leaveMap(lv);
+    return m.subs.map(function(s){
+      var att=0, tot=0, hit=0, missed=0;
+      m.futureDays.forEach(function(fd){
+        var c = fd.subs[s.name]||0; if(!c) return;
+        var t = map[fd.iso];
+        if (t) hit += c;
+        if (t === "medical") return;
+        tot += c;
+        if (t === "od" || (!t && attendRest)) att += c; else missed += c;
+      });
+      var T = s.H + tot, fin = T ? (s.A+att)/T*100 : s.cur;
+      return { name:s.name, current:s.cur, final:fin, affected:hit, missed:missed,
+        below75: fin < 75-1e-9, irreversible: attendRest && fin < 75-1e-9 };
+    });
+  }
+  function series(m, map, attendRest){
+    var A = m.sumA, T = m.sumH;
+    var pts = [[addDays(m.winStart,-1), T ? A/T*100 : 100]];
+    m.futureDays.forEach(function(fd){
+      var t = map[fd.iso];
+      Object.keys(fd.subs).forEach(function(k){
+        var c = fd.subs[k]; if (t === "medical") return;
+        T += c; if (t === "od" || (!t && attendRest)) A += c;
+      });
+      pts.push([fd.date, T ? A/T*100 : 100]);
+    });
+    return pts;
+  }
+
+  /* ---------- render: plan ---------- */
+  function renderPlan(){
+    var m = model, dead = m.subs.filter(function(s){ return s.key==="irreversible"; }).map(function(s){ return s.name; });
+    var days = Math.max(0, Math.round((END - m.winStart)/86400000)+1);
+    var html = "";
+    if (dead.length){
+      html += '<div class="alert" role="alert"><h3>IRREVERSIBLE DETENTION</h3><p>Even if you attend every remaining class, you cannot reach 75% before 29 Nov in: <b>'
+        + dead.map(esc).join(", ") + '</b>. Talk to your faculty or coordinator now.</p></div>';
+    }
+    html += '<div class="tiles">'
+      + '<div class="tile"><b>'+m.totLeft+'</b><span>classes left in the semester (all subjects)</span></div>'
+      + '<div class="tile"><b>'+m.totPlan+'</b><span>classes between now and '+esc(nice(m.plan))+'</span></div>'
+      + '<div class="tile"><b>'+days+'</b><span>calendar days left</span></div></div>';
+    if (m.totLeft === 0) html += '<p class="empty">The semester has no classes left in this window.</p>';
+    html += '<div class="cards">';
+    m.subs.forEach(function(o){
+      html += '<div class="card '+o.cls+'"><span class="chip '+o.chip+'">'+o.st+'</span><h3>'+esc(o.name)+'</h3>'
+        + '<div class="xp" aria-label="'+o.cur.toFixed(1)+' percent"><i style="width:'+o.cur+'%"></i>'
+        + '<u style="left:75%"><span>75</span></u><u style="left:90%"><span>90</span></u></div>'
+        + '<div class="rows">'
+        + line("Now", o.cur.toFixed(1)+"%")
+        + line("Classes left in semester", o.R)
+        + targetLine("To stay above 75%", o.n75, o.R)
+        + targetLine("To reach 90%", o.n90, o.R)
+        + (o.R ? line("Best possible finish", o.best.toFixed(1)+"%") : "")
+        + '<div class="h">BY '+esc(nice(m.plan).toUpperCase())+'</div>'
+        + line("Classes until then", o.Rp)
+        + targetLine("To be above 75%", o.p75, o.Rp)
+        + targetLine("To be at 90%", o.p90, o.Rp)
+        + '</div></div>';
+    });
+    html += '</div><p class="note">Classes are counted from '+(m.incl?"today":"tomorrow")+' onward, skipping the holidays you listed. Your attended count is worked out from your percentage and the classes held so far.</p>';
+    $("out").innerHTML = html;
+  }
+
+  /* ---------- render: charts ---------- */
+  var HEART = [".XX.XX.","XXXXXXX","XXXXXXX",".XXXXX.","..XXX..","...X..."];
+  function heartSVG(fill){ // fill 0, .5 or 1
+    var r = "", cols = fill >= 1 ? 7 : (fill > 0 ? 4 : 0);
+    HEART.forEach(function(row,y){ for (var x=0;x<7;x++){ if (row[x]!=="X") continue;
+      var on = x < cols, c = on ? (y===1&&x<3 ? "#ff8a8a" : "#dd2222") : "#4a4a4a";
+      r += '<rect x="'+(x*4+1)+'" y="'+(y*4+1)+'" width="4" height="4" fill="'+c+'"/>'; } });
+    return '<svg width="32" height="28" viewBox="0 0 30 26" shape-rendering="crispEdges" aria-hidden="true">'+r+'</svg>';
+  }
+  function hearts(pct){
+    var v = Math.round(pct/10*2)/2, h = "";
+    for (var i=0;i<10;i++) h += heartSVG(v >= i+1 ? 1 : (v >= i+.5 ? .5 : 0));
+    return '<div class="hearts" role="img" aria-label="'+(v)+' of 10 hearts">'+h+'</div>';
+  }
+  function lineChart(ser, ymin){
+    var W=640, H=270, L=44, R=14, T=14, B=32, x0=ser[0].pts[0][0].getTime(), x1=END.getTime();
+    var X = function(d){ return L + (d.getTime()-x0)/Math.max(1,(x1-x0))*(W-L-R); };
+    var Y = function(v){ return T + (100-v)/(100-ymin)*(H-T-B); };
+    var s = '<rect width="'+W+'" height="'+H+'" fill="#2a2a2a"/>';
+    for (var v=ymin; v<=100; v+=10){
+      s += '<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(v)+'" y2="'+Y(v)+'" stroke="#444"/>'
+        + '<text x="'+(L-6)+'" y="'+(Y(v)+5)+'" fill="#bbb" font-size="16" text-anchor="end" font-family="VT323,monospace">'+v+'</text>';
+    }
+    s += '<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(75)+'" y2="'+Y(75)+'" stroke="#ff5555" stroke-width="3" stroke-dasharray="8 6"/>'
+      + '<text x="'+(W-R-4)+'" y="'+(Y(75)-6)+'" fill="#ff8080" font-size="17" text-anchor="end" font-family="VT323,monospace">75% detention line</text>';
+    [[ser[0].pts[0][0],"Today"],[END,"29 Nov"]].forEach(function(t,i){
+      s += '<text x="'+(i? W-R : L)+'" y="'+(H-8)+'" fill="#bbb" font-size="17" text-anchor="'+(i?"end":"start")+'" font-family="VT323,monospace">'+t[1]+'</text>'; });
+    ser.forEach(function(se){
+      var pts = se.pts.map(function(p){ return X(p[0]).toFixed(1)+","+Y(Math.max(ymin,p[1])).toFixed(1); }).join(" ");
+      s += '<polyline points="'+pts+'" fill="none" stroke="'+se.color+'" stroke-width="4" stroke-linejoin="round"/>';
+    });
+    return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Projected overall attendance">'+s+'</svg>';
+  }
+  function barChart(m){
+    var rowH = 36, L = 8, tx = 160, tw = 400, H = m.subs.length*rowH + 34, W = 640;
+    var X = function(v){ return tx + v/100*tw; };
+    var s = '<rect width="'+W+'" height="'+H+'" fill="#2a2a2a"/>';
+    m.subs.forEach(function(o,i){
+      var y = 30 + i*rowH, name = o.name.length>16 ? o.name.slice(0,15)+"…" : o.name;
+      var col = o.cur>=90 ? "#7fe01f" : (o.cur>=75 ? "#4aa3ff" : "#ff5a4a");
+      s += '<text x="'+L+'" y="'+(y+12)+'" fill="#eee" font-size="19" font-family="VT323,monospace">'+esc(name)+'</text>'
+        + '<rect x="'+tx+'" y="'+y+'" width="'+tw+'" height="16" fill="#111"/>'
+        + '<rect x="'+tx+'" y="'+y+'" width="'+(o.cur/100*tw)+'" height="16" fill="'+col+'"/>'
+        + '<rect x="'+tx+'" y="'+(y+18)+'" width="'+(o.best/100*tw)+'" height="5" fill="#ffd54a"/>'
+        + '<text x="'+(tx+tw+8)+'" y="'+(y+13)+'" fill="#eee" font-size="19" font-family="VT323,monospace">'+o.cur.toFixed(0)+'%</text>';
+    });
+    s += '<line x1="'+X(75)+'" x2="'+X(75)+'" y1="22" y2="'+(H-6)+'" stroke="#ff5555" stroke-width="3"/>'
+      + '<line x1="'+X(90)+'" x2="'+X(90)+'" y1="22" y2="'+(H-6)+'" stroke="#fff" stroke-width="2" stroke-dasharray="5 4"/>'
+      + '<text x="'+X(75)+'" y="16" fill="#ff8080" font-size="17" text-anchor="middle" font-family="VT323,monospace">75</text>'
+      + '<text x="'+X(90)+'" y="16" fill="#fff" font-size="17" text-anchor="middle" font-family="VT323,monospace">90</text>';
+    return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Attendance by subject">'+s+'</svg>';
+  }
+  function renderCharts(){
+    var m = model, n = m.subs.length;
+    var safe = m.subs.filter(function(s){ return s.cur>=75; }).length;
+    var risk = m.subs.filter(function(s){ return s.cur<75; }).map(function(s){ return s.name; });
+    var verdict = m.overall>=90 ? "Full health. Keep it up." : (m.overall>=75 ? "Healthy, but watch the subjects near 75%." : "Low health. You are in the detention zone.");
+    var html = '<div class="health"><div><div class="big">'+m.overall.toFixed(1)+'%</div>'+hearts(m.overall)
+      +'<div>'+verdict+'</div></div><div class="rows">'
+      + line("Subjects at 75% or more", safe+" of "+n, safe===n?"good":"")
+      + line("In the danger zone", risk.length ? esc(risk.join(", ")) : "None", risk.length?"badt":"good")
+      + line("Classes left", m.totLeft) + '</div></div>';
+
+    var all = series(m, {}, true), none = series(m, {}, false);
+    var ser = [{pts:all,color:"#7fe01f"},{pts:none,color:"#ff5a4a"}];
+    var lg = '<span><i style="background:#7fe01f"></i>Attend every class</span><span><i style="background:#ff5a4a"></i>Miss every class</span>';
+    if (leaves.length){
+      ser.push({pts:series(m, leaveMap(leaves), $("rest").value==="yes"), color:"#4aa3ff"});
+      lg += '<span><i style="background:#4aa3ff"></i>With your simulated days</span>';
+    }
+    var mn = Math.min.apply(null, ser.reduce(function(a,se){ return a.concat(se.pts.map(function(p){return p[1];})); }, [75]));
+    var ymin = Math.max(0, Math.floor(mn/10)*10 - (mn%10===0?10:0)); if (ymin>=90) ymin = 80;
+    html += '<div class="chartbox"><h3>Overall attendance until 29 Nov</h3>'+lineChart(ser, ymin)+'<div class="legend">'+lg+'</div></div>';
+    html += '<div class="chartbox"><h3>Every subject right now</h3>'+barChart(m)
+      +'<div class="legend"><span><i style="background:#4aa3ff"></i>Current</span><span><i style="background:#ffd54a"></i>Best possible finish</span></div></div>';
+    $("charts").innerHTML = html;
+  }
+
+  /* ---------- render: OD simulator ---------- */
+  var TYPE_LABEL = { od:"OD", medical:"Medical", absent:"Absent" };
+  function renderSim(){
+    var m = model;
+    $("leaves").innerHTML = leaves.map(function(l,i){
+      var same = l.from===l.to;
+      return '<span class="lv">'+TYPE_LABEL[l.type]+": "+esc(nice(parseISO(l.from)))+(same?"":" to "+esc(nice(parseISO(l.to))))
+        +'<button type="button" data-i="'+i+'" aria-label="Remove">X</button></span>'; }).join("");
+    var rest = $("rest").value === "yes", res = project(m, leaves, rest);
+    var rows = res.map(function(r){
+      var chip = r.final>=90 ? ["safe","90%+"] : (r.final>=75-1e-9 ? ["ok","ABOVE 75%"] : (r.irreversible ? ["dead","IRREVERSIBLE"] : ["danger","BELOW 75%"]));
+      return "<tr><td>"+esc(r.name)+"</td><td>"+r.current.toFixed(1)+"%</td><td>"+r.affected+"</td><td>"+r.missed
+        +"</td><td><b>"+r.final.toFixed(1)+"%</b></td><td><span class='chip sm "+chip[0]+"'>"+chip[1]+"</span></td></tr>";
+    }).join("");
+    var lost = res.filter(function(r){ return r.irreversible; });
+    $("simOut").innerHTML = (lost.length ? '<div class="alert" role="alert"><h3>IRREVERSIBLE DETENTION</h3><p>With these days off you cannot reach 75% in: <b>'+lost.map(function(r){return esc(r.name);}).join(", ")+'</b>.</p></div>' : "")
+      + '<table><thead><tr><th>Subject</th><th>Now</th><th>Classes on those days</th><th>Classes missed</th><th>Final %</th><th>Result</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  }
+
+  function refresh(scroll){
+    ensureModel(); renderPlan(); renderCharts(); renderSim();
+    $("results").hidden = false;
+    if (scroll) $("out").scrollIntoView({behavior:"smooth", block:"start"});
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  // simulator controls
+  var tmr = addDays(today,1); if (tmr < START) tmr = START; if (tmr > END) tmr = END;
+  ["lfrom","lto"].forEach(function(id){ $(id).min = iso(START); $(id).max = iso(END); });
+  $("lfrom").value = iso(tmr); $("lto").value = iso(tmr);
+  $("ladd").addEventListener("click", function(){
+    var f = $("lfrom").value, t = $("lto").value || f;
+    if (!f) return; if (t < f) t = f;
+    leaves.push({ from:f, to:t, type:$("ltype").value }); refresh(false);
+  });
+  $("leaves").addEventListener("click", function(e){
+    var i = e.target.getAttribute && e.target.getAttribute("data-i");
+    if (i !== null && i !== undefined){ leaves.splice(+i,1); refresh(false); }
+  });
+  $("rest").addEventListener("change", function(){ refresh(false); });
+  // instant recalculation when inputs change after the first calculation
+  ["subjects","plan","inclToday","hol"].forEach(function(id){
+    $(id).addEventListener("input", function(){ if (!$("results").hidden) refresh(false); });
+    $(id).addEventListener("change", function(){ if (!$("results").hidden) refresh(false); });
+  });
+
+  /* ================= ATTENDANCE ADVISOR ================= */
+  var samplePromise = (window.claude && window.claude.use) ? window.claude.use("sample").catch(function(){ return null; }) : Promise.resolve(null);
+  var turns = [], busy = false;
+
+  function dashboardData(){
+    var m = ensureModel();
+    return {
+      section:m.section, today:iso(today), planning_date:iso(m.plan), semester_end:iso(END),
+      overall_pct: +m.overall.toFixed(1), classes_left_in_semester: m.totLeft,
+      subjects: m.subs.map(function(s){ return {
+        name:s.name, current_pct:+s.cur.toFixed(1), classes_held:s.H, classes_left:s.R,
+        must_attend_for_75: s.n75.possible ? s.n75.x : "impossible",
+        can_still_skip_and_stay_75: s.n75.possible ? s.n75.skip : 0,
+        must_attend_for_90: s.n90.possible ? s.n90.x : "impossible",
+        status: s.key }; }),
+      simulator_days_already_added: leaves
+    };
+  }
+  function simulate(a){
+    var m = ensureModel(), extra = [];
+    (a.leaves||[]).forEach(function(l){
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(l.from) || !/^\d{4}-\d{2}-\d{2}$/.test(l.to)) throw new Error("Dates must be YYYY-MM-DD");
+      extra.push({ from:l.from, to:l.to<l.from?l.from:l.to, type: TYPE_LABEL[l.type] ? l.type : "absent" });
+    });
+    var res = project(m, leaves.concat(extra), a.attend_rest !== false);
+    if (a.subjects && a.subjects.length){
+      var q = a.subjects.map(function(x){ return String(x).toLowerCase(); });
+      res = res.filter(function(r){ return q.some(function(k){ return r.name.toLowerCase().indexOf(k)>=0 || k.indexOf(r.name.toLowerCase())>=0; }); });
+    }
+    return res.map(function(r){ return { subject:r.name, current_pct:+r.current.toFixed(1), final_pct:+r.final.toFixed(1),
+      classes_on_those_days:r.affected, classes_missed:r.missed, below_75:r.below75, irreversible:r.irreversible }; });
+  }
+
+  // offline fallback for the most common question shape
+  function localAnswer(text){
+    var m = ensureModel(), t = text.toLowerCase();
+    var words = {one:1,two:2,three:3,four:4,five:5,six:6,seven:7,a:1};
+    var n = null, mm = t.match(/(\d+)\s*-?\s*day/); if (mm) n = +mm[1];
+    else { var w = t.match(/\b(one|two|three|four|five|six|seven)\b[\s-]*day/); if (w) n = words[w[1]]; }
+    var subj = m.subs.filter(function(s){ return t.indexOf(s.name.toLowerCase())>=0; });
+    if (!n){
+      var bad = m.subs.filter(function(s){ return s.cur<75; });
+      return "Your overall attendance is "+m.overall.toFixed(1)+"%. "+(bad.length ? "Watch out for: "+bad.map(function(s){return s.name;}).join(", ")+"." : "Every subject is at 75% or more.")
+        + "\nTry: If I take a 3-day sick leave starting tomorrow, will "+m.subs[0].name+" drop below 75%?";
+    }
+    var type = /\bod\b|on.?duty/.test(t) ? "od" : (/medical certificate|condon/.test(t) ? "medical" : "absent");
+    var from = addDays(today, /today/.test(t) ? 0 : 1), to = addDays(from, n-1);
+    var res = simulate({ leaves:[{from:iso(from), to:iso(to), type:type}], subjects: subj.map(function(s){return s.name;}) });
+    return res.map(function(r){
+      return r.subject+": "+r.current_pct+"% now, "+r.final_pct+"% by 29 Nov if you attend everything else"
+        + (r.irreversible ? ". That is IRREVERSIBLE DETENTION." : (r.below_75 ? ". That drops below 75%." : ". That stays above 75%."));
+    }).join("\n") + "\n(Leave counted "+nice(from)+" to "+nice(to)+", as "+TYPE_LABEL[type]+".)";
+  }
+
+  function rules(){
+    return "You are the Attendance Advisor inside a Minecraft-themed college attendance dashboard. Today is "
+      + today.toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"}) + " (" + iso(today) + "). The semester runs 29 Aug 2026 to 29 Nov 2026. Below 75% is detention; 90% is the safe target. "
+      + "Never do attendance arithmetic yourself. Call get_dashboard for the student's real data and call simulate for any what-if about leave, sick days, absences or OD. "
+      + "Turn phrases like 'tomorrow' or 'a 3-day leave' into ISO dates before calling simulate (leave days are calendar days; weekends simply have no classes). "
+      + "Sick leave counts as absent unless the student says a medical certificate is accepted (then use medical). OD counts as present. "
+      + "Reply in plain text with no markdown, under 110 words: state the exact final percentage, say whether it drops below 75% or becomes irreversible, and give one concrete tip such as how many classes to attend. If asked about anything unrelated to attendance, steer back politely.";
+  }
+  var tools = [
+    { name:"get_dashboard", description:"Get the student's current dashboard: section, per-subject attendance, classes left, classes they must attend for 75% and 90%, and any simulator days already added.",
+      inputSchema:{ type:"object", properties:{}, required:[] }, execute:async function(){ return dashboardData(); } },
+    { name:"simulate", description:"Run the attendance maths for hypothetical leave days (added to any days already in the simulator). Returns the final percentage on 29 Nov per subject.",
+      inputSchema:{ type:"object", properties:{
+        leaves:{ type:"array", description:"Days off to test", items:{ type:"object", properties:{
+          from:{type:"string", description:"First day, YYYY-MM-DD"}, to:{type:"string", description:"Last day, YYYY-MM-DD"},
+          type:{type:"string", enum:["absent","od","medical"]} }, required:["from","to","type"] } },
+        subjects:{ type:"array", description:"Optional subject names to limit the answer", items:{type:"string"} },
+        attend_rest:{ type:"boolean", description:"Assume the student attends all other remaining classes (default true)" } },
+        required:["leaves"] },
+      execute:async function(a){ return simulate(a || {}); } }
+  ];
+
+  function bubble(kind, text){
+    var b = document.createElement("div"); b.className = "b " + kind; b.textContent = text;
+    $("msgs").appendChild(b); $("msgs").scrollTop = $("msgs").scrollHeight; return b;
+  }
+  async function send(text){
+    text = (text||"").trim(); if (!text || busy) return;
+    busy = true; $("csend").disabled = true; $("cin").value = "";
+    bubble("user", text); turns.push({ role:"user", content:text });
+    var b = bubble("bot", "Thinking...");
+    var sample = await samplePromise, reply = null;
+    if (sample){
+      try {
+        ensureModel();
+        var r = await sample([{ role:"user", content:rules() }].concat(turns.slice(-10)),
+          { cache:false, modelTier:"quick", tools:tools, onText:function(o){ b.textContent = o.text; $("msgs").scrollTop = $("msgs").scrollHeight; } });
+        reply = r.text;
+      } catch(e){ reply = null; }
+    }
+    if (!reply){
+      try { reply = localAnswer(text); } catch(e2){ reply = "I could not work that out. Use the OD and leave simulator below the charts."; }
+    }
+    b.textContent = reply; turns.push({ role:"assistant", content:reply });
+    busy = false; $("csend").disabled = false; $("msgs").scrollTop = $("msgs").scrollHeight; $("cin").focus();
+  }
+  function openChat(open){
+    $("chat").hidden = !open; $("fab").setAttribute("aria-expanded", String(open));
+    if (open){
+      if (!$("msgs").children.length){
+        bubble("bot", "Hi! I read your dashboard and do the maths for you. Ask about leaves, OD days or how many classes you can skip.");
+        var first = subjectsOf($("section").value)[0] || "your first subject";
+        $("sugs").innerHTML = "";
+        ["If I take a 3-day sick leave starting tomorrow, will "+first+" drop below 75%?", "How many classes can I skip and stay safe?"].forEach(function(q){
+          var bt = document.createElement("button"); bt.type="button"; bt.textContent = q;
+          bt.addEventListener("click", function(){ send(q); }); $("sugs").appendChild(bt); });
+      }
+      $("cin").focus();
+    }
+  }
+  $("fab").addEventListener("click", function(){ openChat($("chat").hidden); });
+  $("cclose").addEventListener("click", function(){ openChat(false); });
+  $("csend").addEventListener("click", function(){ send($("cin").value); });
+  $("cin").addEventListener("keydown", function(e){ if (e.key === "Enter") send($("cin").value); });
+
+  /* ---------- dataset loading ---------- */
+  function normDay(s){
+    var t = String(s||"").trim().slice(0,3).toLowerCase();
+    for (var i=0;i<7;i++) if (DAYS[i].toLowerCase()===t) return DAYS[i];
+    return null;
+  }
+  function parseCSV(text){
+    var rows = text.split(/\r?\n/).filter(function(l){ return l.trim(); }).map(function(l){
+      var out=[], cur="", q=false;
+      for (var i=0;i<l.length;i++){ var c=l[i];
+        if (c=='"'){ q=!q; } else if (c=="," && !q){ out.push(cur.trim()); cur=""; } else cur+=c; }
+      out.push(cur.trim()); return out; });
+    if (!rows.length) return null;
+    var h = rows[0].map(function(x){ return x.toLowerCase(); });
+    var ci = h.findIndex(function(x){ return /section|class|group/.test(x); });
+    var di = h.findIndex(function(x){ return /day/.test(x); });
+    var si = h.findIndex(function(x){ return /subject|course|name/.test(x); });
+    if (ci<0||di<0||si<0) return null;
+    var res = {};
+    rows.slice(1).forEach(function(r){
+      var d = normDay(r[di]); if (!d || !r[si] || !r[ci]) return;
+      var sec = r[ci];
+      res[sec] = res[sec] || {}; (res[sec][d] = res[sec][d] || []).push(r[si]);
+    });
+    return Object.keys(res).length ? { sections:res, holidays:[] } : null;
+  }
+  $("file").addEventListener("change", function(e){
+    var f = e.target.files[0]; if (!f) return;
+    var r = new FileReader();
+    r.onload = function(){
+      var parsed = null;
+      try {
+        if (/\.json$/i.test(f.name)){
+          var j = JSON.parse(r.result);
+          parsed = j.sections ? j : { sections:j, holidays:[] };
+        } else parsed = parseCSV(r.result);
+      } catch(err){ parsed = null; }
+      if (!parsed || !Object.keys(parsed.sections).length){
+        $("dataStatus").textContent = "Could not read that file. Use a CSV with section, day and subject columns, or the JSON format below.";
+        return;
+      }
+      data.sections = parsed.sections; usingSample = false;
+      if (parsed.holidays && parsed.holidays.length) $("hol").value = parsed.holidays.join(", ");
+      fillSections(); fillSubjects(); $("results").hidden = true; turns = []; $("msgs").innerHTML = "";
+    };
+    r.readAsText(f);
+  });
+
+  $("section").addEventListener("change", function(){ fillSubjects(); $("results").hidden = true; });
+  $("calc").addEventListener("click", function(){ refresh(true); });
+  fillSections(); fillSubjects();
+})();
+</script>
+</body>
+</html>
