@@ -1,0 +1,603 @@
+{
+ "sections": {
+  "I ECE-A": {
+   "Mon": [
+    "Philosophy of Engineering",
+    "Philosophy of Engineering",
+    "Chemistry",
+    "Advanced Calculus & Complex Analysis",
+    "Chemistry Lab",
+    "Chemistry Lab",
+    "Biology",
+    "General Aptitude (CDC)"
+   ],
+   "Tue": [
+    "Electronic System & PCB Design",
+    "Chemistry",
+    "Advanced Calculus & Complex Analysis",
+    "Programming for Problem Solving",
+    "Workshop",
+    "Workshop",
+    "Workshop",
+    "Workshop"
+   ],
+   "Wed": [
+    "Chemistry",
+    "Philosophy of Engineering",
+    "Programming for Problem Solving",
+    "PPS Lab",
+    "PPS Lab",
+    "PCB Lab",
+    "PCB Lab"
+   ],
+   "Thu": [
+    "German",
+    "German",
+    "German",
+    "Advanced Calculus & Complex Analysis",
+    "General Aptitude (CDC)",
+    "General Aptitude (CDC)",
+    "NSS",
+    "NSS"
+   ],
+   "Fri": [
+    "Programming for Problem Solving",
+    "Advanced Calculus & Complex Analysis",
+    "Electronic System & PCB Design",
+    "Chemistry",
+    "Biology",
+    "German",
+    "German",
+    "German"
+   ]
+  },
+  "I ECE-B / EEE": {
+   "Mon": [
+    "General Aptitude (CDC)",
+    "Elec. System & PCB (ECE) / Elec. Circuits (EEE)",
+    "Chemistry Lab",
+    "Chemistry Lab",
+    "Philosophy of Engineering",
+    "Philosophy of Engineering",
+    "Chemistry",
+    "Advanced Calculus & Complex Analysis"
+   ],
+   "Tue": [
+    "Workshop",
+    "Workshop",
+    "Workshop",
+    "Workshop",
+    "Biology",
+    "Chemistry",
+    "Advanced Calculus & Complex Analysis",
+    "Programming for Problem Solving"
+   ],
+   "Wed": [
+    "Elec. System & PCB (ECE) / Elec. Circuits (EEE)",
+    "PPS Lab",
+    "General Aptitude (CDC)",
+    "General Aptitude (CDC)",
+    "PPS Lab",
+    "Chemistry",
+    "Philosophy of Engineering",
+    "Programming for Problem Solving"
+   ],
+   "Thu": [
+    "NSS",
+    "NSS",
+    "Biology",
+    "Advanced Calculus & Complex Analysis",
+    "Programming for Problem Solving",
+    "German",
+    "German",
+    "German"
+   ],
+   "Fri": [
+    "PCB / EC Lab",
+    "PCB / EC Lab",
+    "German",
+    "German",
+    "German",
+    "Chemistry",
+    "Advanced Calculus & Complex Analysis"
+   ]
+  },
+  "I ECE-DS": {
+   "Mon": [
+    "Biology",
+    "General Aptitude (CDC)",
+    "PCB Lab",
+    "PCB Lab",
+    "Philosophy of Engineering",
+    "Philosophy of Engineering",
+    "Chemistry",
+    "Advanced Calculus & Complex Analysis"
+   ],
+   "Tue": [
+    "Chemistry Lab",
+    "Chemistry Lab",
+    "NSS",
+    "NSS",
+    "Electronic System & PCB Design",
+    "Chemistry",
+    "Advanced Calculus & Complex Analysis",
+    "Programming for Problem Solving"
+   ],
+   "Wed": [
+    "General Aptitude (CDC)",
+    "General Aptitude (CDC)",
+    "Advanced Calculus & Complex Analysis",
+    "PPS Lab",
+    "PPS Lab",
+    "Chemistry",
+    "Philosophy of Engineering",
+    "Programming for Problem Solving"
+   ],
+   "Thu": [
+    "Biology",
+    "Advanced Calculus & Complex Analysis",
+    "Programming for Problem Solving",
+    "German",
+    "German",
+    "German",
+    "Electronic System & PCB Design",
+    "Chemistry"
+   ],
+   "Fri": [
+    "German",
+    "German",
+    "German",
+    "Workshop",
+    "Workshop",
+    "Workshop",
+    "Workshop"
+   ]
+  },
+  "I Biotech-B": {
+   "Mon": [
+    "Cell Biology",
+    "Yoga (Physical & Mental Health)",
+    "Yoga (Physical & Mental Health)",
+    "Biochemistry",
+    "Philosophy of Engineering",
+    "Philosophy of Engineering",
+    "Advanced Calculus & Complex Analysis",
+    "Chemistry"
+   ],
+   "Tue": [
+    "General Aptitude (CDC)",
+    "General Aptitude (CDC)",
+    "Cell Biology",
+    "Biochemistry",
+    "Chemistry",
+    "Advanced Calculus & Complex Analysis",
+    "Programming for Problem Solving"
+   ],
+   "Wed": [
+    "Workshop",
+    "Workshop",
+    "Workshop",
+    "Workshop",
+    "Programming for Problem Solving",
+    "Chemistry",
+    "Philosophy of Engineering",
+    "Programming for Problem Solving"
+   ],
+   "Thu": [
+    "Chemistry Lab",
+    "Chemistry Lab",
+    "Advanced Calculus & Complex Analysis",
+    "Cell Biology",
+    "Chemistry",
+    "Japanese",
+    "Japanese",
+    "Japanese"
+   ],
+   "Fri": [
+    "Biochemistry",
+    "General Aptitude (CDC)",
+    "Advanced Calculus & Complex Analysis",
+    "Japanese",
+    "Japanese",
+    "Japanese",
+    "PPS Lab",
+    "PPS Lab"
+   ]
+  },
+  "I Biomed (Biotech-B sheet)": {
+   "Mon": [
+    "Yoga (Physical & Mental Health)",
+    "Yoga (Physical & Mental Health)",
+    "Human Physiology & Anatomy",
+    "Philosophy of Engineering",
+    "Philosophy of Engineering",
+    "Advanced Calculus & Complex Analysis",
+    "Chemistry"
+   ],
+   "Tue": [
+    "General Aptitude (CDC)",
+    "General Aptitude (CDC)",
+    "Chemistry",
+    "Advanced Calculus & Complex Analysis",
+    "Programming for Problem Solving"
+   ],
+   "Wed": [
+    "Workshop",
+    "Workshop",
+    "Workshop",
+    "Workshop",
+    "Programming for Problem Solving",
+    "Chemistry",
+    "Philosophy of Engineering",
+    "Programming for Problem Solving"
+   ],
+   "Thu": [
+    "Chemistry Lab",
+    "Chemistry Lab",
+    "Advanced Calculus & Complex Analysis",
+    "Human Physiology & Anatomy",
+    "Chemistry",
+    "Japanese",
+    "Japanese",
+    "Japanese"
+   ],
+   "Fri": [
+    "General Aptitude (CDC)",
+    "Advanced Calculus & Complex Analysis",
+    "Japanese",
+    "Japanese",
+    "Japanese",
+    "PPS Lab",
+    "PPS Lab"
+   ]
+  },
+  "II BME": {
+   "Mon": [
+    "Medical Physics",
+    "Electric & Electronic Circuits",
+    "Social Engineering",
+    "Social Engineering",
+    "DLMS/EEC Lab",
+    "DLMS/EEC Lab"
+   ],
+   "Tue": [
+    "Electric & Electronic Circuits",
+    "Medical Physics",
+    "Biomedical Signals & Systems",
+    "Transforms & Boundary Value Problems",
+    "Verbal Reasoning",
+    "Verbal Reasoning"
+   ],
+   "Wed": [
+    "Biomedical Signals & Systems",
+    "Digital Logic for Medical Systems",
+    "Transforms & Boundary Value Problems",
+    "Verbal Reasoning",
+    "Universal Human Values-II"
+   ],
+   "Thu": [
+    "Transforms & Boundary Value Problems",
+    "Medical Physics",
+    "Biomedical Signals & Systems",
+    "Digital Logic for Medical Systems",
+    "DLMS/EEC Lab",
+    "DLMS/EEC Lab"
+   ],
+   "Fri": [
+    "Professional Ethics",
+    "Transforms & Boundary Value Problems",
+    "Electric & Electronic Circuits",
+    "Digital Logic for Medical Systems",
+    "Universal Human Values-II",
+    "Universal Human Values-II"
+   ]
+  },
+  "II ECE-DS A": {
+   "Mon": [
+    "Electromagnetic Theory & Interference",
+    "Transforms & Boundary Value Problems",
+    "Social Engineering",
+    "Social Engineering",
+    "Universal Human Values-II",
+    "Universal Human Values-II",
+    "Devices & Digital IC Lab",
+    "Devices & Digital IC Lab"
+   ],
+   "Tue": [
+    "Computer Organization & Architecture",
+    "Transforms & Boundary Value Problems",
+    "Electromagnetic Theory & Interference",
+    "Digital Logic Design",
+    "Universal Human Values-II",
+    "Verbal Reasoning",
+    "Verbal Reasoning"
+   ],
+   "Wed": [
+    "Transforms & Boundary Value Problems",
+    "Solid State Devices",
+    "Computer Organization & Architecture",
+    "Digital Logic Design",
+    "Verbal Reasoning"
+   ],
+   "Thu": [
+    "Solid State Devices",
+    "Computer Organization & Architecture",
+    "Transforms & Boundary Value Problems",
+    "Professional Ethics",
+    "Devices & Digital IC Lab",
+    "Devices & Digital IC Lab"
+   ],
+   "Fri": [
+    "Digital Logic Design",
+    "Solid State Devices",
+    "Electromagnetic Theory & Interference",
+    "Computer Organization & Architecture"
+   ]
+  },
+  "II ECE-DS B": {
+   "Mon": [
+    "Devices & Digital IC Lab",
+    "Devices & Digital IC Lab",
+    "Digital Logic Design",
+    "Solid State Devices",
+    "Computer Organization & Architecture",
+    "Social Engineering"
+   ],
+   "Tue": [
+    "Devices & Digital IC Lab",
+    "Devices & Digital IC Lab",
+    "Computer Organization & Architecture",
+    "Digital Logic Design",
+    "Electromagnetic Theory & Interference",
+    "Transforms & Boundary Value Problems"
+   ],
+   "Wed": [
+    "Universal Human Values-II",
+    "Social Engineering",
+    "Electromagnetic Theory & Interference",
+    "Transforms & Boundary Value Problems",
+    "Digital Logic Design"
+   ],
+   "Thu": [
+    "Universal Human Values-II",
+    "Universal Human Values-II",
+    "Verbal Reasoning",
+    "Verbal Reasoning",
+    "Transforms & Boundary Value Problems",
+    "Computer Organization & Architecture",
+    "Solid State Devices",
+    "Electromagnetic Theory & Interference"
+   ],
+   "Fri": [
+    "Verbal Reasoning",
+    "Professional Ethics",
+    "Transforms & Boundary Value Problems",
+    "Solid State Devices",
+    "Computer Organization & Architecture"
+   ]
+  },
+  "III BME": {
+   "Mon": [
+    "Analytical & Logical Thinking Skills",
+    "Analytical & Logical Thinking Skills",
+    "Microcontroller Lab (MPMC)",
+    "Microcontroller Lab (MPMC)",
+    "Modern Wireless Communication",
+    "Microcontrollers & Applications in Medicine",
+    "Principles of Medical Imaging",
+    "Indian Art Form"
+   ],
+   "Tue": [
+    "Bio DSP Lab",
+    "Bio DSP Lab",
+    "Analytical & Logical Thinking Skills",
+    "Biomedical Signal Processing",
+    "Biometrics",
+    "Probability & Statistics",
+    "Microcontrollers & Applications in Medicine"
+   ],
+   "Wed": [
+    "Biomedical Signal Processing",
+    "Probability & Statistics",
+    "Principles of Medical Imaging",
+    "Biometrics"
+   ],
+   "Thu": [
+    "Community Connect",
+    "Probability & Statistics",
+    "Biomedical Signal Processing",
+    "Modern Wireless Communication",
+    "Microcontrollers & Applications in Medicine"
+   ],
+   "Fri": [
+    "Community Connect",
+    "Principles of Medical Imaging",
+    "Probability & Statistics",
+    "Biometrics",
+    "Modern Wireless Communication"
+   ]
+  },
+  "III ECE-A": {
+   "Mon": [
+    "Machine Learning for All",
+    "Microprocessor & Microcontroller",
+    "Microprocessor & Microcontroller",
+    "Discrete Mathematics",
+    "Analytical & Logical Thinking Skills",
+    "Analytical & Logical Thinking Skills"
+   ],
+   "Tue": [
+    "Indian Art Form",
+    "System & Network on Chip",
+    "Microprocessor & Microcontroller",
+    "Microprocessor Project",
+    "Analytical & Logical Thinking Skills"
+   ],
+   "Wed": [
+    "VLSI Design & Technology",
+    "Discrete Mathematics",
+    "System & Network on Chip",
+    "Community Connect",
+    "VLSI / Microprocessor Lab",
+    "VLSI / Microprocessor Lab"
+   ],
+   "Thu": [
+    "Discrete Mathematics",
+    "Machine Learning for All",
+    "VLSI Design & Technology",
+    "Community Connect"
+   ],
+   "Fri": [
+    "System & Network on Chip",
+    "Discrete Mathematics",
+    "Machine Learning for All",
+    "VLSI Design & Technology",
+    "VLSI / Microprocessor Lab",
+    "VLSI / Microprocessor Lab"
+   ]
+  },
+  "III ECE-B": {
+   "Mon": [
+    "VLSI / Microprocessor Lab",
+    "VLSI / Microprocessor Lab",
+    "Machine Learning for All",
+    "Microprocessor & Microcontroller",
+    "Discrete Mathematics",
+    "System & Network on Chip"
+   ],
+   "Tue": [
+    "Analytical & Logical Thinking Skills",
+    "Analytical & Logical Thinking Skills",
+    "Community Connect",
+    "Microprocessor & Microcontroller",
+    "System & Network on Chip",
+    "VLSI Design & Technology"
+   ],
+   "Wed": [
+    "Analytical & Logical Thinking Skills",
+    "Microprocessor Project",
+    "Microprocessor & Microcontroller",
+    "Discrete Mathematics",
+    "Indian Art Form"
+   ],
+   "Thu": [
+    "VLSI / Microprocessor Lab",
+    "VLSI / Microprocessor Lab",
+    "Discrete Mathematics",
+    "VLSI Design & Technology",
+    "Machine Learning for All",
+    "Community Connect"
+   ],
+   "Fri": [
+    "VLSI Design & Technology",
+    "Discrete Mathematics",
+    "Machine Learning for All",
+    "System & Network on Chip"
+   ]
+  },
+  "III ECE-DS": {
+   "Mon": [
+    "Database Design & Management",
+    "Microprocessor & Microcontroller",
+    "VLSI Design & Technology",
+    "Discrete Mathematics"
+   ],
+   "Tue": [
+    "VLSI Design & Technology",
+    "Microprocessor & Microcontroller",
+    "Machine Learning for All",
+    "Community Connect",
+    "VLSI / Microprocessor Lab",
+    "VLSI / Microprocessor Lab"
+   ],
+   "Wed": [
+    "Indian Art Form",
+    "Microprocessor & Microcontroller",
+    "Discrete Mathematics",
+    "VLSI Design & Technology",
+    "Analytical & Logical Thinking Skills",
+    "Analytical & Logical Thinking Skills"
+   ],
+   "Thu": [
+    "Discrete Mathematics",
+    "Machine Learning for All",
+    "Database Design & Management",
+    "Community Connect"
+   ],
+   "Fri": [
+    "Machine Learning for All",
+    "Discrete Mathematics",
+    "Database Design & Management",
+    "Microprocessor Project",
+    "Analytical & Logical Thinking Skills",
+    "VLSI / Microprocessor Lab",
+    "VLSI / Microprocessor Lab"
+   ]
+  },
+  "IV ECE-A": {
+   "Mon": [
+    "Computer Communication & Network Security",
+    "Behavioural Psychology",
+    "Semiconductor Memory Design"
+   ],
+   "Tue": [
+    "Computer Communication & Network Security",
+    "Semiconductor Memory Design",
+    "Wireless Communication & Antenna Systems",
+    "Machine Learning for All"
+   ],
+   "Wed": [
+    "Wireless Communication & Antenna Systems",
+    "Computer Communication & Network Security",
+    "Scripting Language for EDA",
+    "Machine Learning for All"
+   ],
+   "Thu": [
+    "Machine Learning for All",
+    "Behavioural Psychology",
+    "Scripting Language for EDA",
+    "Wireless Communication & Antenna Systems"
+   ],
+   "Fri": [
+    "Computer Communication & Network Security",
+    "Behavioural Psychology",
+    "Semiconductor Memory Design",
+    "Scripting Language for EDA"
+   ]
+  },
+  "IV ECE-B": {
+   "Mon": [
+    "Computer Communication & Network Security",
+    "Behavioural Psychology",
+    "Scripting Language for EDA",
+    "Machine Learning for All"
+   ],
+   "Tue": [
+    "Computer Communication & Network Security",
+    "Scripting Language for EDA",
+    "Machine Learning for All",
+    "Wireless Communication & Antenna Systems"
+   ],
+   "Wed": [
+    "Computer Communication & Network Security",
+    "Semiconductor Memory Design",
+    "Behavioural Psychology",
+    "Wireless Communication & Antenna Systems"
+   ],
+   "Thu": [
+    "Semiconductor Memory Design",
+    "Wireless Communication & Antenna Systems",
+    "Computer Communication & Network Security",
+    "Behavioural Psychology"
+   ],
+   "Fri": [
+    "Scripting Language for EDA",
+    "Semiconductor Memory Design",
+    "Machine Learning for All"
+   ]
+  }
+ },
+ "holidays": [
+  "2026-10-02"
+ ]
+}

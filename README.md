@@ -32,28 +32,46 @@ python3 -m http.server 8000
 
 To deploy, upload the folder to GitHub Pages, Netlify or Vercel. No build command is needed.
 
-## Load the real timetables
+## Timetable data
 
-The page starts with **sample** timetables. Open **Timetable data and holidays** on the page and load your dataset file.
+The page already contains the college timetables (SRM Institute of Science and Technology, Tiruchirappalli, Faculty of Engineering and Technology), typed in from the provided PDFs. The same data is in [`timetables.csv`](timetables.csv) and [`timetables.json`](timetables.json).
+
+Sections included (14):
+
+| Year | Sections |
+|------|----------|
+| I (2024-25 sheets) | ECE-A, ECE-B / EEE, ECE-DS, Biotech-B, Biomed (from the Biotech-B sheet) |
+| II (2026-27) | BME, ECE-DS A, ECE-DS B |
+| III (2026-27) | BME, ECE-A, ECE-B, ECE-DS |
+| IV (2026-27) | ECE-A, ECE-B |
+
+To use different data, open **Timetable data and holidays** on the page and load a file.
 
 **CSV** (one row per class period):
 
 ```csv
 section,day,period,subject
-Section A,Mon,1,Maths
-Section A,Mon,2,Physics
+III ECE-A,Mon,1,Machine Learning for All
+III ECE-A,Mon,2,Microprocessor & Microcontroller
 ```
 
 **JSON:**
 
 ```json
 {
-  "sections": { "Section A": { "Mon": ["Maths", "Physics"], "Tue": ["Chemistry"] } },
+  "sections": { "III ECE-A": { "Mon": ["Machine Learning for All", "Microprocessor & Microcontroller"] } },
   "holidays": ["2026-10-02"]
 }
 ```
 
-Examples: [`sample-timetable.csv`](sample-timetable.csv) and [`sample-timetable.json`](sample-timetable.json). If the official dataset is in another layout (for example an Excel grid), convert it to this CSV shape.
+### How the PDFs were read
+- Slot letters (A, B, C ...) were replaced with the subject names from each sheet's subject table.
+- Every period a class occupies counts as one class. A two-period lab counts as two.
+- Blank cells and lunch have no class.
+- Labs and non-slot classes (Workshop, NSS, Yoga, German, Japanese, CDC and so on) are separate subjects.
+- In IV ECE, the lab period is counted under *Computer Communication & Network Security*, because it shares that course code.
+- The I ECE-B / EEE sheet has one shared cell for the ECE and EEE subjects, so it is one section.
+- The Biotech-B sheet is split into two sections, Biotech-B and Biomed, because their subjects differ in the shared cells.
 
 ## How the maths works
 
@@ -77,16 +95,16 @@ The OD simulator treats **OD** as present, **Medical** as removed from the total
 ## Assumptions
 
 - Each period in the timetable counts as one class.
-- Only 2 Oct 2026 is listed as a holiday by default. Edit the holidays box on the page for your college.
+- Only 2 Oct 2026 is listed as a holiday by default, because the dataset has no holiday list. Edit the holidays box on the page for your college.
 - Today's classes count as still to come (untick the box if they are already over).
 
 ## Project structure
 
 ```
 .
-├── index.html               # the whole app (HTML, CSS, JS)
-├── sample-timetable.csv     # sample data, 10 sections
-├── sample-timetable.json    # same data in JSON form
+├── index.html          # the whole app (HTML, CSS, JS, timetables built in)
+├── timetables.csv      # all 14 sections, one row per class period
+├── timetables.json     # same data in JSON form
 ├── LICENSE
 └── README.md
 ```
